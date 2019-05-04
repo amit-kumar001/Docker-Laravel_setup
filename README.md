@@ -98,7 +98,7 @@ we are also binding our PHP configuration file,<strong> ~/project_directory/php/
 
 ```
 
-<li>port: we need to take two ports to run nginx image.</br>
+<li><strong>port:</strong> we need to take two ports to run nginx image.</br>
 image build at "80" port and browse in "8084" port.</li>
 
 ```
@@ -142,8 +142,8 @@ volumes:
 
 ```
 
-<li>dbdata:</li> persists the contents of the <strong>/var/lib/mysql</strong> folder present inside the container. This allows you to stop and restart the db service without losing data.
- bind mount binds <strong>/project_directory/mysql/my.cnf to /etc/mysql/my.cnf</strong> in the container.
+<li><strong>dbdata:<strong> persists the contents of the <strong>/var/lib/mysql</strong> folder present inside the container. This allows you to stop and restart the db service without losing data.
+ bind mount binds <strong>/project_directory/mysql/my.cnf to /etc/mysql/my.cnf</strong> in the container.</li>
 
  -----------------------------------------------------
 ```

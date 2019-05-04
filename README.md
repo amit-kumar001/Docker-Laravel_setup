@@ -28,3 +28,132 @@ This will copy the content of your directory (Lara-proj1) to the container and b
 
 during this command, these dependencies will take few-time  to get download.<br>
 </ol>
+
+### Creating the Docker Compose File
+
+<ol>
+<strong>Docker-compose.yml</strong> file is the main connection file, in which we make a connection between our used services.</br>
+<strong>Laravel application</strong> runs using <strong>nginx</strong> (proxy and load balancer server) with <strong>SQL</strong> connectivity.</br>
+
+<li><strong>version:</strong> docker compose version</li>
+
+<strong>version: '3'</strong></br>
+
+<li><strong>services:</strong> which is being used in the project</li>
+
+```
+
+services:
+  # name of service :PHP
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    networks:
+      - app-network
+```
+
+<li><strong>context:</strong> will define the path of the directory.</li>
+<li><strong>dockerfile:</strong> will provide a path of dockerfile in this directory.</li>
+<li><strong>container_name:</strong> which container we want to run we will define here like-laravel applictaion</li>
+<li><strong>restart:</strong> will up your container unless we don't stop it.</li>
+<li><strong>tty:</strong> tty is essentially a text input-output environment aka shell.</li>
+<li><strong>environment:</strong> the given environment will run inside of Docker container.</li>
+<li><strong>working_dir:</strong> sets the working directory of the container that is created.</li>
+
+<li>Persisting Data</li>
+we will use the <strong>volume and bindmounts</strong> for Persisting (existing) a data. volume will provide the backup of the existing data.</br>
+app service contains the application code to the <strong>/var/www</strong> folder in the container. it will speed up the development process. if we make any changes in the local application directory those changes reflected inside the container.</br>
+we are also binding our PHP configuration file,<strong> ~/project_directory/php/local.ini, to /usr/local/etc/php/conf.d/local.ini</strong> inside the container.</br>
+
+```
+  
+  volumes:
+       - ./:/var/www
+       - .~/project_directory/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+
+```
+
+------------------------------------------------------
+
+```
+  # Nginx Service
+
+  webserver:
+    image: nginx:alpine
+    container_name: webserver
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8084:80"
+    networks:
+      - app-network
+
+```
+
+<li>port: we need to take two ports to run nginx image.</br>
+image build at "80" port and browse in "8084" port.</li>
+
+```
+
+    volumes:
+      - ./:/var/www
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+
+```
+
+bind the application code in the project directory to the <strong>/var/www</strong> directory inside the container.</br>
+The configuration file that you will add to <strong>~/project_directory/nginx/conf.d/</strong> will also be mounted to <strong>/etc/nginx/conf.d/</strong> in the container, allowing you to add or modify the configuration directory's contents as needed.</br>
+
+------------------------------------------------------
+```
+# MySQL Service
+  db:
+    image: mysql:5.7.22
+    container_name: db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "13306:3306"
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_ROOT_PASSWORD: passcode
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - app-network
+
+```
+
+pulls the mysql:5.7.22 image from Docker and defines a few environmental variables, including a database and the root password for the database.This service definition also maps port 13306 on the host to port 3306 on the container.</br>
+
+```
+
+volumes:
+      - dbdata:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/my.cnf
+
+```
+
+<li>dbdata:</li> persists the contents of the <strong>/var/lib/mysql</strong> folder present inside the container. This allows you to stop and restart the db service without losing data.
+ bind mount binds <strong>/project_directory/mysql/my.cnf to /etc/mysql/my.cnf</strong> in the container.
+
+ -----------------------------------------------------
+```
+
+ # Docker Networks
+networks:
+  app-network:
+    driver: bridge
+
+```
+
+<li><strong>app-network:</strong> provide the communication between the containers, the services are connected to a bridge network.</li>
+</ol>

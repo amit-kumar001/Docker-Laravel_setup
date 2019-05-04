@@ -34,7 +34,7 @@ during this command, these dependencies will take few-time  to get download.<br>
 
 <ol>
 <strong>Docker-compose.yml</strong> file is the main connection file, in which we make a connection between our used services.</br>
-<strong>Laravel application</strong> runs using <strong>nginx</strong> (proxy and load balancer server) with <strong>SQL</strong> connectivity.</br>
+<strong>Laravel application</strong> runs using <strong>nginx</strong> (proxy and load balancer server) with <strong>SQL</strong> connectivity.</br></br>
 
 <li><strong>version:</strong> docker compose version</li>
 
@@ -147,6 +147,8 @@ volumes:
  bind mount binds <strong>/project_directory/mysql/my.cnf to /etc/mysql/my.cnf</strong> in the container.</li>
 
  -----------------------------------------------------
+ <li><strong>app-network:</strong> provide the communication between the containers, the services are connected to a bridge network.</li>
+ 
 ```
 
  # Docker Networks
@@ -156,5 +158,5 @@ networks:
 
 ```
 
-<li><strong>app-network:</strong> provide the communication between the containers, the services are connected to a bridge network.</li>
+
 </ol>

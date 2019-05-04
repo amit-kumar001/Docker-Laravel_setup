@@ -1,5 +1,7 @@
 # Docker-Laravel_setup
-### Laravel + Docker setup 
+### Laravel + Docker setup  
+
+![laravel600x400](https://user-images.githubusercontent.com/47202519/57177678-3d053280-6e84-11e9-85a5-a1785c0cd032.jpg)
 
 <ol>
 Laravel is a free, open-source PHP web framework. To create a connection between laravel and docker we need to download docker (to install docker follow the given link "/") <br>
@@ -30,7 +32,9 @@ This will copy the content of your directory (Lara-proj1) to the container and b
 during this command, these dependencies will take few-time  to get download.<br>
 </ol>
 
-### Creating the Docker Compose File
+### Creating the Docker Compose File  
+
+![docker-octopus600x400](https://user-images.githubusercontent.com/47202519/57177681-41315000-6e84-11e9-8ff8-ee14808b72d4.jpg)
 
 <ol>
 <strong>Docker-compose.yml</strong> file is the main connection file, in which we make a connection between our used services.</br>

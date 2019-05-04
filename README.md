@@ -5,26 +5,27 @@
 Laravel is a free, open-source PHP web framework. To create a connection between laravel and docker we need to download docker (to install docker follow the given link "/") <br>
 After downloading a docker into the system, we need to <strong>download laravel and install it's dependencies</strong>.</br>
 start work from your home directory.<br>
-<strong>$ cd</strong><br>
+<strong>$ cd</strong><br></br>
+
 <li>Download laravel</li>
 <strong>$ git clone https://github.com/laravel/laravel.git name_of_directory</strong></br>
-<strong> git clone https://github.com/laravel/laravel.git lara_proj1</strong></br>  
+<strong> git clone https://github.com/laravel/laravel.git lara_proj1</strong></br>  </br>
 
-![1](https://user-images.githubusercontent.com/47202519/57177133-b8fc7c00-6e7e-11e9-893f-b2f961c1d975.png)</br>
+![1](https://user-images.githubusercontent.com/47202519/57177133-b8fc7c00-6e7e-11e9-893f-b2f961c1d975.png)</br></br>
 
 <li>move into the lara_proj1 directory.</li>
-<strong>$ cd lara_proj1</strong><br>
+<strong>$ cd lara_proj1</strong><br></br>
 
 <li>Composer</li>
 composer is a dependency manager that written in and for php.<br>
 it allows you to declare the libraries your project depends on and it will manage (install/update) them.</br>
 
-<strong>$ docker run --rm -v $(pwd):/app composer install</strong><br>
+<strong>$ docker run --rm -v $(pwd):/app composer install</strong><br></br>
 
 we use -v and -rm flages with docker run, it creates a temporary container that will be bind-mounted(replica) to your current directory before being removed. </br>
 This will copy the content of your directory (Lara-proj1) to the container and by default, the vendor folder Composer created inside the current working directory.<br>  
 
-![2](https://user-images.githubusercontent.com/47202519/57177135-bd289980-6e7e-11e9-8114-3277af99c764.png)</br>
+![2](https://user-images.githubusercontent.com/47202519/57177135-bd289980-6e7e-11e9-8114-3277af99c764.png)</br></br>
 
 during this command, these dependencies will take few-time  to get download.<br>
 </ol>
@@ -37,7 +38,7 @@ during this command, these dependencies will take few-time  to get download.<br>
 
 <li><strong>version:</strong> docker compose version</li>
 
-<strong>version: '3'</strong></br>
+<strong>version: '3'</strong></br></br>
 
 <li><strong>services:</strong> which is being used in the project</li>
 
@@ -71,7 +72,7 @@ services:
 <li><strong>Persisting Data</strong></li>
 we will use the <strong>volume and bindmounts</strong> for Persisting (existing) a data. volume will provide the backup of the existing data.</br>
 app service contains the application code to the <strong>/var/www</strong> folder in the container. it will speed up the development process. if we make any changes in the local application directory those changes reflected inside the container.</br>
-we are also binding our PHP configuration file,<strong> ~/project_directory/php/local.ini, to /usr/local/etc/php/conf.d/local.ini</strong> inside the container.</br>
+we are also binding our PHP configuration file,<strong> ~/project_directory/php/local.ini, to /usr/local/etc/php/conf.d/local.ini</strong> inside the container.</br></br>
 
 ```
   

@@ -66,9 +66,9 @@ services:
 <li><strong>restart:</strong> will up your container unless we don't stop it.</li>
 <li><strong>tty:</strong> tty is essentially a text input-output environment aka shell.</li>
 <li><strong>environment:</strong> the given environment will run inside of Docker container.</li>
-<li><strong>working_dir:</strong> sets the working directory of the container that is created.</li>
+<li><strong>working_dir:</strong> sets the working directory of the container that is created.</li></br>
 
-<li>Persisting Data</li>
+<li><strong><strong>Persisting Data</strong></li>
 we will use the <strong>volume and bindmounts</strong> for Persisting (existing) a data. volume will provide the backup of the existing data.</br>
 app service contains the application code to the <strong>/var/www</strong> folder in the container. it will speed up the development process. if we make any changes in the local application directory those changes reflected inside the container.</br>
 we are also binding our PHP configuration file,<strong> ~/project_directory/php/local.ini, to /usr/local/etc/php/conf.d/local.ini</strong> inside the container.</br>
@@ -142,7 +142,7 @@ volumes:
 
 ```
 
-<li><strong>dbdata:<strong> persists the contents of the <strong>/var/lib/mysql</strong> folder present inside the container. This allows you to stop and restart the db service without losing data.
+<li><strong>dbdata:</strong> persists the contents of the <strong>/var/lib/mysql</strong> folder present inside the container. This allows you to stop and restart the db service without losing data.
  bind mount binds <strong>/project_directory/mysql/my.cnf to /etc/mysql/my.cnf</strong> in the container.</li>
 
  -----------------------------------------------------

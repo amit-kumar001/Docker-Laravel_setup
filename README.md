@@ -143,12 +143,12 @@ pulls the mysql:5.7.22 image from Docker and defines a few environmental variabl
 
 volumes:
       - dbdata:/var/lib/mysql
-      - ./mysql/my.cnf:/etc/mysql/my.cnf
+      - ./user.sql:/docker-entrypoint-initdb.d/user.sql
 
 ```
 
 <li><strong>dbdata:</strong> persists the contents of the <strong>/var/lib/mysql</strong> folder present inside the container. This allows you to stop and restart the db service without losing data.
- bind mount binds <strong>/project_directory/mysql/my.cnf to /etc/mysql/my.cnf</strong> in the container.</li>
+ bind mount binds <strong>/project_directory/user.sql to docker-entrypoint-initdb.d/user.sqlf</strong> in the container.</li>
 
  -----------------------------------------------------
  <li><strong>app-network:</strong> provide the communication between the containers, the services are connected to a bridge network.</li>
